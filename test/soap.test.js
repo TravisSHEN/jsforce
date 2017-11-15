@@ -32,7 +32,7 @@ describe("soap", function() {
    *
    */
   it("should describe tabs", function(done) {
-    conn.soap.describeTabs(function(err, apps) {
+    conn.soap().describeTabs(function(err, apps) {
       if (err) { throw err; }
       assert(apps.length > 0);
       apps.forEach(function(app) {
@@ -104,7 +104,7 @@ describe("soap", function() {
     });
 
     it("should convert lead", function(done) {
-      conn.soap.convertLead({
+      conn.soap().convertLead({
         leadId: leadIds[0],
         convertedStatus: convertedStatus
       }, function(err, ret) {
@@ -120,7 +120,7 @@ describe("soap", function() {
     });
 
     it("should convert lead by specifying accountId and without creating opportunity", function(done) {
-      conn.soap.convertLead({
+      conn.soap().convertLead({
         leadId: leadIds[1],
         accountId: accountIds[0],
         convertedStatus: convertedStatus,
@@ -138,7 +138,7 @@ describe("soap", function() {
     it("should merge records", function(done) {
       var masterRecord = _.extend({ type: 'Lead' }, { Id: leadIds[2] }, leads[2]);
       var recordToMergeIds = [ leadIds[3], leadIds[4] ];
-      conn.soap.merge({
+      conn.soap().merge({
         masterRecord: masterRecord,
         recordToMergeIds: recordToMergeIds
       }, function(err, ret) {
@@ -193,7 +193,7 @@ describe("soap", function() {
       ExtId__c: '104'
     }];
     it("should create sObjects", function(done) {
-      conn.soap.create(sObjects, function(err, rets) {
+      conn.soap().create(sObjects, function(err, rets) {
         if (err) { throw err; }
         for(var i=0; i<rets.length; i++) {
           var ret = rets[i];
@@ -210,7 +210,7 @@ describe("soap", function() {
     });
     
     it("should update sObjects", function(done) {
-      conn.soap.update(updates, function(err, rets) {
+      conn.soap().update(updates, function(err, rets) {
         if (err) { throw err; }
         for(var i=0; i<rets.length; i++) {
           var ret = rets[i];
@@ -222,7 +222,7 @@ describe("soap", function() {
     });
     
     it("should upsert sObjects", function(done) {
-      conn.soap.upsert('ExtId__c', sObjects, function(err, rets) {
+      conn.soap().upsert('ExtId__c', sObjects, function(err, rets) {
         if (err) { throw err; }
         for(var i=0; i<rets.length; i++) {
           var ret = rets[i];
@@ -235,7 +235,7 @@ describe("soap", function() {
     });
     
     it("should delete sObjects", function(done) {
-      conn.soap.delete(deleteIds, function(err, rets) {
+      conn.soap().delete(deleteIds, function(err, rets) {
         if (err) { throw err; }
         for(var i=0; i<rets.length; i++) {
           var ret = rets[i];
